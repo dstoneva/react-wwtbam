@@ -6,30 +6,17 @@ import { prizesList } from "../../constants/Constants";
 import AskTheAudience from "../Modals/AskTheAudience";
 import Header from "../Header/Header";
 
-const Quiz = ({
-  questions,
-  answers,
-  setAnswers,
-  incorrectAnswers,
-  setIncorrectAnswers,
-  questionNumber,
-  setQuestionNumber,
-  setGameOver,
-  setCurrentPrize,
-  lifelineProps
-}) => {
-  const {
-    fiftyFiftyUsed,
-    setFiftyFiftyUsed,
-    setAskAfriendUsed,
-    askAfriendUsed,
-    setAskTheAudienceUsed,
-    askTheAudienceUsed
-  } = lifelineProps;
-  
-  const correctAnswer = questions[questionNumber].correct_answer;
-  let currentIncorrectAnswers = questions[questionNumber].incorrect_answers;
-  const currentQuestion = questions[questionNumber].question;
+const Quiz = ({ gamestateProps, lifelineProps, questionProps }) => {
+  console.log(gamestateProps);
+  const { fiftyFiftyUsed, setAskTheAudienceUsed, askTheAudienceUsed } = lifelineProps;
+
+  const { answers, setAnswers, incorrectAnswers, setIncorrectAnswers } = questionProps;
+
+  const { questionNumber, questionsData, setCurrentPrize } = gamestateProps;
+
+  const correctAnswer = questionsData[questionNumber].correct_answer;
+  let currentIncorrectAnswers = questionsData[questionNumber].incorrect_answers;
+  const currentQuestion = questionsData[questionNumber].question;
   let currentQuestionAnswers = currentIncorrectAnswers.concat(correctAnswer).sort();
 
   useEffect(() => {
@@ -60,14 +47,7 @@ const Quiz = ({
 
   return (
     <>
-      <Header
-        setFiftyFiftyUsed={setFiftyFiftyUsed}
-        setAskTheAudienceUsed={setAskTheAudienceUsed}
-        fiftyFifyUsed={fiftyFiftyUsed}
-        askTheAudienceUsed={askTheAudienceUsed}
-        askAfriendUsed={askAfriendUsed}
-        setAskAfriendUsed={setAskAfriendUsed}
-      />
+      <Header lifelineProps={lifelineProps} />
       {askTheAudienceUsed && (
         <AskTheAudience
           correctAnswer={correctAnswer}
@@ -75,17 +55,10 @@ const Quiz = ({
           askTheAudienceUsed={askTheAudienceUsed}
           setAskTheAudienceUsed={setAskTheAudienceUsed}
           incorrectAnswers={incorrectAnswers}
-          fiftyFiftyUsed={fiftyFiftyUsed}
         />
       )}
       <Question question={currentQuestion}></Question>
-      <Answers
-        answers={answers}
-        correctAnswer={correctAnswer}
-        setGameOver={setGameOver}
-        questionNumber={questionNumber}
-        setQuestionNumber={setQuestionNumber}
-      />
+      <Answers gamestateProps={gamestateProps} answers={answers} correctAnswer={correctAnswer} />
     </>
   );
 };

@@ -2,14 +2,15 @@ import React from "react";
 import classes from "./Header.module.css";
 import Lifelines from "../Lifelines/Lifelines";
 
-const Header = ({
-  setFiftyFiftyUsed,
-  setAskTheAudienceUsed,
-  askTheAudienceUsed,
-  fiftyFifyUsed,
-  askAfriendUsed,
-  setAskAfriendUsed
-}) => {
+const Header = ({ lifelineProps }) => {
+  const {
+    setFiftyFiftyUsed,
+    setAskTheAudienceUsed,
+    askTheAudienceUsed,
+    fiftyFifyUsed,
+    askAfriendUsed,
+    setAskAfriendUsed
+  } = lifelineProps;
   return (
     <>
       <div className={classes["heading-wrapper"]}>

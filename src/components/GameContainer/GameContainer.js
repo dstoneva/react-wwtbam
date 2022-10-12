@@ -6,6 +6,7 @@ import QuizWrapper from "../Quiz/QuizWrapper";
 import Quiz from "../Quiz/Quiz";
 import GameOverModal from "../Modals/GameOverModal";
 import { Spinner } from "reactstrap";
+import GlobalModal from "../Modals/GlobalModal";
 
 const GameContainer = () => {
   const [questionsData, setQuestionsData] = useState(null);
@@ -48,6 +49,7 @@ const GameContainer = () => {
     setFiftyFiftyUsed(false);
     setAskTheAudienceUsed(false);
     setAskAfriendUsed(false);
+    setShowModal(false);
   };
 
   const lifelineProps = {
@@ -59,15 +61,32 @@ const GameContainer = () => {
     setAskAfriendUsed
   };
 
-  const gameStateProps = {
-    questionsData
+  const gamestateProps = {
+    questionNumber,
+    setQuestionNumber,
+    questionsData,
+    showModal,
+    setShowModal,
+    modalContent,
+    setModalContent,
+    gameOver,
+    setGameOver,
+    currentPrize,
+    setCurrentPrize,
+    newGame
   };
 
+  const questionProps = {
+    answers,
+    setAnswers,
+    incorrectAnswers,
+    setIncorrectAnswers
+  };
   console.log(lifelineProps);
 
   return (
     <div className={classes["app-container"]}>
-      {gameOver && <GameOverModal currentPrize={currentPrize} gameOver={gameOver} newGame={newGame} />}
+      {modalContent && <GlobalModal showModal={showModal} content={modalContent} />}
       <QuizWrapper>
         {loading ? (
           <Spinner
@@ -80,19 +99,7 @@ const GameContainer = () => {
         ) : (
           <>
             {questionsData !== null ? (
-              <Quiz
-                questions={questionsData}
-                setCurrentPrize={setCurrentPrize}
-                answers={answers}
-                setAnswers={setAnswers}
-                questionNumber={questionNumber}
-                setQuestionNumber={setQuestionNumber}
-                setGameOver={setGameOver}
-                gameOver={gameOver}
-                incorrectAnswers={incorrectAnswers}
-                setIncorrectAnswers={setIncorrectAnswers}
-                lifelineProps={lifelineProps}
-              />
+              <Quiz gamestateProps={gamestateProps} questionProps={questionProps} lifelineProps={lifelineProps} />
             ) : null}
           </>
         )}
