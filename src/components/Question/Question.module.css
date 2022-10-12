@@ -1,0 +1,13 @@
+.question {
+  /* max-width: max-content; */
+  min-width: 80%;
+  /* height: auto; */
+  background: linear-gradient(#100241, black);
+  text-align: center;
+  padding: 10px;
+  border-radius: 15px;
+  border: 2px solid #ffa800;
+  font-size: 1.5rem;
+  overflow: visible;
+  margin: auto;
+}

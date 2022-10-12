@@ -1,0 +1,29 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700;900&family=Righteous&family=Roboto:wght@200;300;500;700;900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Electrolize&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Special+Elite&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Special Elite", cursive !important;
+  background-color: #020230 !important;
+  
+}
+
+/* .app-container {
+  height: 100vh;
+  display: flex;
+  color: white;
+} */
+
+.app-container{
+  color: white;
+  height: 100vh;
+  min-width: 90%;
+  display: flex;
+  /* align-items: flex-end; */
+  justify-content: space-between;
+}

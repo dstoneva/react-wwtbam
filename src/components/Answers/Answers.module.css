@@ -1,0 +1,115 @@
+.answers {
+  min-width: 90%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  position: relative;
+  cursor: pointer;
+  padding: 0.75rem 1.25rem;
+  
+}
+
+.answer {
+  color: white;
+  display: flex;
+  flex-direction: row;
+  height: 4.5rem;
+  gap: 1rem;
+  align-items: center;
+  justify-content: flex-start;
+  width: 45%;
+  padding: 0.75rem 1.25rem;
+  margin: 0 10px 20px 10px;
+  background: linear-gradient(#0e0124, #22074d);
+  border: 1px solid white;
+  border-radius: 15px;
+  font-size: 1.25rem;
+  cursor: pointer;
+}
+
+.answer:hover,
+.answer.active {
+  background: mediumblue;
+}
+
+.answer-selected {
+  color: white;
+  display: flex;
+  height: 4.5rem;
+  font-size: 1.25rem;
+  flex-direction: row;
+  gap: 1rem;
+  align-items: center;
+  justify-content: flex-start;
+  width: 45%;
+  padding: 0.75rem 1.25rem;
+  margin: 0 10px 20px 10px;
+  border: 1px solid white;
+  border-radius: 15px;
+  cursor: pointer;
+  animation: selected 2.5s;
+  animation-direction: reverse;
+}
+
+.answers .answer span,
+.answer-incorrect span,
+.answer-correct span,
+.answer-selected span {
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: #ffa800;
+}
+
+.answer-correct {
+  color: white;
+  display: flex;
+  flex-direction: row;
+  height: 4.5rem;
+  font-size: 1.25rem;
+  gap: 1rem;
+  align-items: center;
+  justify-content: flex-start;
+  width: 45%;
+  padding: 0.75rem 1.25rem;
+  margin: 0 10px 20px 10px;
+  border: 1px solid white;
+  border-radius: 15px;
+  cursor: pointer;
+  background: radial-gradient(circle at 10% 20%, rgb(15, 213, 172) 0%, rgb(34, 182, 198) 100.2%);
+}
+
+@keyframes selected {
+  0%,
+  22%,
+  42% {
+    background: mediumblue;
+  }
+  20%,
+  40%,
+  60% {
+    background: linear-gradient(#0e0124, #22074d);
+  }
+  62%,
+  100% {
+    background: #ffa800;
+  }
+}
+
+.answer-incorrect {
+  color: white;
+  display: flex;
+  flex-direction: row;
+  font-size: 1.25rem;
+  height: 4.5rem;
+  gap: 1rem;
+  align-items: center;
+  justify-content: flex-start;
+  width: 45%;
+  padding: 0.75rem 1.25rem;
+  margin: 0 10px 20px 10px;
+  border: 1px solid white;
+  border-radius: 15px;
+  cursor: pointer;
+  background: crimson;
+}

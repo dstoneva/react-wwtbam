@@ -1,0 +1,34 @@
+.prizes-list {
+  padding: 25px;
+  list-style: none;
+  min-width: 300px;
+  float: right;
+  display: flex;
+  flex-direction: column-reverse;
+  align-self: center;
+}
+
+.prizes-list-item {
+  display: flex;
+}
+
+.prizes-list-item-active {
+  background: linear-gradient(to left, rgb(252, 74, 26), rgb(247, 183, 51));
+  /* border: 1px solid white; */
+  border-radius: 5px;
+  padding-left: 10px;
+  padding-top: 5px;
+}
+
+.prizes-list-number {
+  width: 30%;
+  font-size: 1.75rem;
+  font-weight: 100;
+  text-align: right;
+  margin-right: 1rem;
+}
+
+.prizes-list-amount {
+  font-size: 1.75rem !important;
+  font-weight: 400;
+}
