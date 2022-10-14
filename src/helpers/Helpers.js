@@ -29,6 +29,5 @@ export function addToCertainValue(max, count) {
   for (let i = 0; i < results.length; i++) {
     results[i] = Math.round((results[i] / currSum) * max);
   }
-  console.log("results", results);
   return results;
 }

@@ -1,7 +1,6 @@
 .question {
-  /* max-width: max-content; */
   min-width: 80%;
-  /* height: auto; */
+  height: auto;
   background: linear-gradient(#100241, black);
   text-align: center;
   padding: 10px;
