@@ -2,36 +2,31 @@ import React, { useState } from "react";
 import classes from "./Answers.module.css";
 import { abcd } from "../../constants/Constants";
 import Answer from "./Answer";
-import { Button } from "reactstrap";
 
-const Answers = ({ answers, correctAnswer, gamestateProps }) => {
-  const { questionNumber, setQuestionNumber, setGameOver, newGame, currentPrize, setModalContent, setShowModal } =
-    gamestateProps;
+const Answers = ({ answers, correctAnswer, gameStateProps }) => {
+  const { questionNumber, setQuestionNumber, setGameOutcome, setCurrentPrize, setShowModal } = gameStateProps;
 
   const [selectedAnswer, setSelectedAnswer] = useState("");
 
-  const handleClick = (answer) => {
+  const HandleClick = (answer) => {
     setSelectedAnswer(answer);
     if (answer === correctAnswer && questionNumber < 14) {
       setQuestionNumber((prevState) => prevState + 1);
-      setSelectedAnswer("");
-    } else {
-      setModalContent(gameOverModal);
-      setShowModal(true);
-      setGameOver(true);
-    }
-  };
+      if (questionNumber >= 4 && questionNumber < 9) {
+        setCurrentPrize("$5000");
+      }
+      if (questionNumber >= 9 && questionNumber <= 13) {
+        setCurrentPrize("$30 000");
+      }
 
-  const gameOverModal = () => {
-    return {
-      header: "Game Over",
-      body: `Game Over! You win ${currentPrize}.`,
-      footer: (
-        <Button color="success" onClick={newGame}>
-          Play again?
-        </Button>
-      )
-    };
+      setSelectedAnswer("");
+    } else if (answer === correctAnswer && questionNumber === 14) {
+      setGameOutcome("win");
+      setShowModal(true);
+    } else {
+      setGameOutcome("loss");
+      setShowModal(true);
+    }
   };
 
   return (
@@ -42,7 +37,7 @@ const Answers = ({ answers, correctAnswer, gamestateProps }) => {
             key={index}
             letter={abcd[index]}
             answer={answer}
-            handleClick={handleClick}
+            handleClick={HandleClick}
             correctAnswer={correctAnswer}
             setSelectedAnswer={setSelectedAnswer}
             selectedAnswer={selectedAnswer}

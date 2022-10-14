@@ -2,17 +2,17 @@ import React, { useEffect } from "react";
 import Question from "../Question/Question";
 import Answers from "../Answers/Answers";
 import { pickRandomElement } from "../../helpers/Helpers";
-import { prizesList } from "../../constants/Constants";
 import AskTheAudience from "../Modals/AskTheAudience";
 import Header from "../Header/Header";
+import CallFriend from "../Modals/CallFriend";
+import { Button } from "reactstrap";
 
-const Quiz = ({ gamestateProps, lifelineProps, questionProps }) => {
-  console.log(gamestateProps);
-  const { fiftyFiftyUsed, setAskTheAudienceUsed, askTheAudienceUsed } = lifelineProps;
+const Quiz = ({ gameStateProps, lifelineProps, questionProps }) => {
+  const { fiftyFiftyUsed, setAskTheAudienceUsed, askTheAudienceUsed, askAfriendUsed, setAskAfriendUsed } = lifelineProps;
 
   const { answers, setAnswers, incorrectAnswers, setIncorrectAnswers } = questionProps;
 
-  const { questionNumber, questionsData, setCurrentPrize } = gamestateProps;
+  const { questionNumber, questionsData } = gameStateProps;
 
   const correctAnswer = questionsData[questionNumber].correct_answer;
   let currentIncorrectAnswers = questionsData[questionNumber].incorrect_answers;
@@ -24,13 +24,13 @@ const Quiz = ({ gamestateProps, lifelineProps, questionProps }) => {
       let remainingIncorrectAnswer = pickRandomElement(currentIncorrectAnswers);
       currentQuestionAnswers = currentQuestionAnswers.map((answer) => {
         if (answer !== remainingIncorrectAnswer && answer !== correctAnswer) {
-          return " ";
+          return "";
         }
         return answer;
       });
       currentIncorrectAnswers = incorrectAnswers.map((answer) => {
         if (answer !== remainingIncorrectAnswer) {
-          return " ";
+          return "";
         }
         return answer;
       });
@@ -42,23 +42,30 @@ const Quiz = ({ gamestateProps, lifelineProps, questionProps }) => {
   useEffect(() => {
     setIncorrectAnswers(currentIncorrectAnswers);
     setAnswers(currentQuestionAnswers);
-    setCurrentPrize(questionNumber !== 0 ? prizesList[questionNumber - 1].amount : "$ 0");
   }, [questionNumber]);
 
   return (
     <>
-      <Header lifelineProps={lifelineProps} />
+      {askAfriendUsed && (
+        <CallFriend
+          setAskAfriendUsed={setAskAfriendUsed}
+          askAfriendUsed={askAfriendUsed}
+          correctAnswer={correctAnswer}
+          incorrectAnswers={incorrectAnswers}
+        />
+      )}
       {askTheAudienceUsed && (
         <AskTheAudience
           correctAnswer={correctAnswer}
           answers={answers}
-          askTheAudienceUsed={askTheAudienceUsed}
-          setAskTheAudienceUsed={setAskTheAudienceUsed}
           incorrectAnswers={incorrectAnswers}
+          setAskTheAudienceUsed={setAskTheAudienceUsed}
+          askTheAudienceUsed={askTheAudienceUsed}
         />
       )}
-      <Question question={currentQuestion}></Question>
-      <Answers gamestateProps={gamestateProps} answers={answers} correctAnswer={correctAnswer} />
+      <Header lifelineProps={lifelineProps} />
+      <Question question={currentQuestion} />
+      <Answers gameStateProps={gameStateProps} answers={answers} correctAnswer={correctAnswer} />
     </>
   );
 };

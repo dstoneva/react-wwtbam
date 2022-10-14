@@ -14,21 +14,19 @@
 
 .prizes-list-item-active {
   background: linear-gradient(to left, rgb(252, 74, 26), rgb(247, 183, 51));
-  /* border: 1px solid white; */
-  border-radius: 5px;
-  padding-left: 10px;
-  padding-top: 5px;
+  text-align: left !important;
+  margin-top: 2px !important;
+  margin-bottom: 2px !important;
 }
 
 .prizes-list-number {
-  width: 30%;
-  font-size: 1.75rem;
-  font-weight: 100;
-  text-align: right;
+  width: 30% !important;
+  font-size: 1.275rem !important;
+  font-weight: 100 !important;
+  text-align: right !important;
   margin-right: 1rem;
 }
 
 .prizes-list-amount {
-  font-size: 1.75rem !important;
-  font-weight: 400;
+  font-size: 1.275rem !important;
 }

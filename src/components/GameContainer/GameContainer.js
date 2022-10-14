@@ -4,23 +4,22 @@ import getQuestions from "../../data/opentdbApi";
 import PrizesList from "../PrizesList/PrizesList";
 import QuizWrapper from "../Quiz/QuizWrapper";
 import Quiz from "../Quiz/Quiz";
-import GameOverModal from "../Modals/GameOverModal";
 import { Spinner } from "reactstrap";
-import GlobalModal from "../Modals/GlobalModal";
+import EndGameModal from "../Modals/EndGameModal";
+import EndGameBtn from "./EndGameBtn";
 
 const GameContainer = () => {
   const [questionsData, setQuestionsData] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [currentPrize, setCurrentPrize] = useState(0);
+  const [currentPrize, setCurrentPrize] = useState("$0");
   const [answers, setAnswers] = useState([]);
   const [questionNumber, setQuestionNumber] = useState(0);
-  const [gameOver, setGameOver] = useState(false);
+  const [gameOutcome, setGameOutcome] = useState("");
   const [fiftyFiftyUsed, setFiftyFiftyUsed] = useState(false);
   const [askTheAudienceUsed, setAskTheAudienceUsed] = useState(false);
   const [incorrectAnswers, setIncorrectAnswers] = useState([]);
   const [askAfriendUsed, setAskAfriendUsed] = useState(false);
   const [showModal, setShowModal] = useState(false);
-  const [modalContent, setModalContent] = useState();
 
   const generateQuestions = async () => {
     try {
@@ -38,14 +37,12 @@ const GameContainer = () => {
     generateQuestions();
   }, []);
 
-  const newGame = (e) => {
-    e.preventDefault();
+  const newGame = () => {
     generateQuestions();
-    setQuestionsData(null);
     setQuestionNumber(0);
-    setGameOver(false);
+    setGameOutcome("");
     setAnswers([]);
-    setCurrentPrize(0);
+    setCurrentPrize("$0");
     setFiftyFiftyUsed(false);
     setAskTheAudienceUsed(false);
     setAskAfriendUsed(false);
@@ -65,15 +62,9 @@ const GameContainer = () => {
     questionNumber,
     setQuestionNumber,
     questionsData,
-    showModal,
     setShowModal,
-    modalContent,
-    setModalContent,
-    gameOver,
-    setGameOver,
-    currentPrize,
-    setCurrentPrize,
-    newGame
+    setGameOutcome,
+    setCurrentPrize
   };
 
   const questionProps = {
@@ -82,29 +73,29 @@ const GameContainer = () => {
     incorrectAnswers,
     setIncorrectAnswers
   };
-  console.log(lifelineProps);
-
   return (
     <div className={classes["app-container"]}>
-      {modalContent && <GlobalModal showModal={showModal} content={modalContent} />}
+      {showModal && (
+        <EndGameModal showModal={showModal} gameOutcome={gameOutcome} currentPrize={currentPrize} newGame={newGame} />
+      )}
+
       <QuizWrapper>
         {loading ? (
-          <Spinner
-            style={{
-              marginBottom: "6rem",
-              height: "3rem",
-              width: "3rem"
-            }}
-          />
+          <Spinner />
         ) : (
           <>
             {questionsData !== null ? (
-              <Quiz gamestateProps={gamestateProps} questionProps={questionProps} lifelineProps={lifelineProps} />
+              <>
+                <EndGameBtn setShowModal={setShowModal} setGameOutcome={setGameOutcome}>
+                  End game
+                </EndGameBtn>
+                <Quiz gameStateProps={gamestateProps} questionProps={questionProps} lifelineProps={lifelineProps} />
+              </>
             ) : null}
           </>
         )}
       </QuizWrapper>
-      <PrizesList questionNumber={questionNumber} />
+      <PrizesList key={Date.now()} questionNumber={questionNumber} />
     </div>
   );
 };

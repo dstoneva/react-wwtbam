@@ -1,12 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import { Button } from "reactstrap";
 
-const Lifeline = ({ used, setUsed, name }) => {
+const Lifeline = ({ setUsed, name }) => {
+  const [disabled, setDisabled] = useState(false);
   const handleClick = () => {
     setUsed(true);
+    setDisabled(true);
   };
+
   return (
-    <Button onClick={handleClick} disabled={used}>
+    <Button onClick={handleClick} disabled={disabled} color={disabled ? "danger" : "warning"}>
       {name}
     </Button>
   );

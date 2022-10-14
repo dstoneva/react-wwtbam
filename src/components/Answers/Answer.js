@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import classes from "./Answers.module.css";
 
 const Answer = ({ letter, correctAnswer, answer, setSelectedAnswer, selectedAnswer, handleClick}) => {
