@@ -3,10 +3,11 @@ import { Button } from "reactstrap";
 import { modalData, prizesList } from "../../constants/Constants";
 
 const EndGameBtn = ({ setModalContent, questionNumber, newGame }) => {
+  let prize = questionNumber === 0 ? "$ 0" : prizesList[questionNumber - 1].amount;
   const handleClick = () => {
     setModalContent({
       ...modalData.exitGame,
-      body: `Game over! You win ${prizesList[questionNumber - 1].amount}.`,
+      body: `Game over! You win ${prize}.`,
       action: newGame
     });
   };
