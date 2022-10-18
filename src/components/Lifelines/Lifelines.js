@@ -1,12 +1,7 @@
 import React from "react";
 import classes from "./Lifelines.module.css";
 import Lifeline from "./Lifeline";
-const Lifelines = ({
-  setFiftyFiftyUsed,
-  setAskTheAudienceUsed,
-  setAskAfriendUsed,
-}) => {
-
+const Lifelines = ({ setFiftyFiftyUsed, setAskTheAudienceUsed, setAskAfriendUsed }) => {
   return (
     <div className={classes["lifelines"]}>
       <Lifeline setUsed={setAskAfriendUsed} name={"Call a friend"} />

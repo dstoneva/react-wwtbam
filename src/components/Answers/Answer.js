@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import classes from "./Answers.module.css";
 
-const Answer = ({ letter, correctAnswer, answer, setSelectedAnswer, selectedAnswer, handleClick}) => {
+const Answer = ({ letter, correctAnswer, answer, setSelectedAnswer, selectedAnswer, handleClick }) => {
   const [className, setClassName] = useState(`${classes["answer"]}`);
 
   useEffect(() => {
@@ -14,7 +14,7 @@ const Answer = ({ letter, correctAnswer, answer, setSelectedAnswer, selectedAnsw
         setClassName(`${classes["answer-correct"]}`);
       }
     }, 2500);
-  }, [selectedAnswer]);
+  }, [selectedAnswer, answer, correctAnswer]);
 
   const answerClicked = () => {
     setSelectedAnswer(answer);
@@ -30,7 +30,7 @@ const Answer = ({ letter, correctAnswer, answer, setSelectedAnswer, selectedAnsw
   };
 
   return (
-    <button disabled={selectedAnswer} className={className} onClick={() => answerClicked(answer)}>
+    <button disabled={selectedAnswer || answer === ""} className={className} onClick={() => answerClicked(answer)}>
       <span>{letter}</span> {decodeURIComponent(answer)}
     </button>
   );
