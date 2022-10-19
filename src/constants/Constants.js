@@ -16,4 +16,16 @@ export const prizesList = [
   { id: 15, amount: "$ 1 000 000" }
 ];
 
-export const abcd = ["A", "B", "C", "D"]
+export const abcd = ["A", "B", "C", "D"];
+
+export const modalData = {
+  winGame: { title: "Congratulations!", showModal: true, buttonText: "Play again?" },
+  gameOver: { title: "Game over!", showModal: true, buttonText: "Play again?" },
+  callAFriend: { title: "Call a friend", showModal: true, buttonText: "Close" },
+  askTheAudience: { title: "Ask the audience", showModal: true, buttonText: "Close" },
+  exitGame: {
+    title: "End game",
+    showModal: true,
+    buttonText: "Play again?"
+  }
+};
